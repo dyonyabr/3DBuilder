@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmccdc44wuyi"]
+
+[ext_resource type="Texture2D" uid="uid://bx2hwxfyr1ogf" path="res://Assets/Textures/dust.png" id="1_1ewpl"]
+
+[sub_resource type="Curve" id="Curve_bus02"]
+_data = [Vector2(0, 0), 0.0, 1.999, 0, 0, Vector2(1e-05, 0.692308), 1.69503, 1.69503, 0, 0, Vector2(0.876812, 0.681319), -0.379121, -0.379121, 0, 0, Vector2(1, 0), -5.89743, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_r6amj"]
+curve = SubResource("Curve_bus02")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r0rtb"]
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 1.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, -7, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_min = 0.5
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_r6amj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc5qo"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_1ewpl")
+billboard_mode = 1
+billboard_keep_scale = true
+point_size = 62.7
+distance_fade_mode = 2
+distance_fade_min_distance = 1.0
+distance_fade_max_distance = 3.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_80sa4"]
+material = SubResource("StandardMaterial3D_cc5qo")
+size = Vector2(0.25, 0.25)
+orientation = 2
+
+[node name="StepDust" type="GPUParticles3D"]
+amount = 3
+lifetime = 0.35
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_r0rtb")
+draw_pass_1 = SubResource("PlaneMesh_80sa4")
